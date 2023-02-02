@@ -22,10 +22,20 @@ public class Google_search {
         googleSearchPage.searchBox.sendKeys("apple" + Keys.ENTER);
 
     }
-    @Then("User sees apple – Google Search is in the google title")
+    @Then("User sees apple - Google Search is in the google title")
     public void user_sees_apple_google_search_is_in_the_google_title() {
 
-        Assert.assertEquals("Verification is failed", "apple – Google Search", Driver.getDriver().getTitle());
+        Assert.assertEquals("Verification is failed", "apple - Google Search", Driver.getDriver().getTitle());
+    }
+
+    @When("User types {string} in the google search box and clicks enter")
+    public void userTypesInTheGoogleSearchBoxAndClicksEnter(String searchKeyWord) {
+        googleSearchPage.searchBox.sendKeys(searchKeyWord + Keys.ENTER);
+    }
+
+    @Then("User sees {string} is in the google title")
+    public void userSeesIsInTheGoogleTitle(String expectedTitle) {
+        Assert.assertEquals("Verification is failed", expectedTitle, Driver.getDriver().getTitle());
     }
 
 }
