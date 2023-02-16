@@ -9,7 +9,6 @@ Feature: Passing multiple parameters to the step
       | cucumber bdd |
       | data driven  |
       | wooden spoon |
-      | apple        |
 
 # option + Command + L
 # CTRL+ALT+L

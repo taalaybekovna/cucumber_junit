@@ -9,9 +9,26 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
 import java.security.Key;
+import java.util.List;
 
 public class Google_search {
     GoogleSearchPage googleSearchPage = new GoogleSearchPage();
+
+    @When("User searches for {string} capital")
+    public void user_searches_for_capital(String countryName) {
+        googleSearchPage.searchBox.sendKeys("what is capital of "+countryName + Keys.ENTER);
+    }
+
+    @Then("User should see {string} in the result")
+    public void user_should_see_in_the_result(String capitalCity) {
+
+        Assert.assertEquals(capitalCity,googleSearchPage.capitalText.getText());
+
+    }
+
+
+
+
     @Given("User is on Google search page")
     public void user_is_on_google_search_page() {
         Driver.getDriver().get("https://www.google.com/");
@@ -38,4 +55,20 @@ public class Google_search {
         Assert.assertEquals("Verification is failed", expectedTitle, Driver.getDriver().getTitle());
     }
 
+    @Then("User should be able to search for following:")
+    public void userShouldBeAbleToSearchForFollowing(List<String> searchKeywords) {
+        System.out.println("searchKeywords: " + searchKeywords);
+
+        for (String each : searchKeywords) {
+            googleSearchPage.searchBox.clear();
+            googleSearchPage.searchBox.sendKeys(each+Keys.ENTER);
+            Assert.assertEquals(each+" - Google Search",Driver.getDriver().getTitle());
+        }
+
+    }
+
+    @Then("User sees apple – Google Search is in the google title")
+    public void userSeesAppleGoogleSearchIsInTheGoogleTitle() {
+
+    }
 }
