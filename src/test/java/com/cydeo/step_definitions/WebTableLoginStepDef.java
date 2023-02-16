@@ -3,14 +3,26 @@ package com.cydeo.step_definitions;
 import com.cydeo.pages.WebTableLoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.util.Map;
+
 public class WebTableLoginStepDef {
 
     WebTableLoginPage webTableLoginPage = new WebTableLoginPage();
+
+    @When("user enters below credentials")
+    public void user_enters_below_credentials(Map<String, String> credentials) {
+        webTableLoginPage.login(credentials.get("username"), credentials.get("password"));
+
+    }
+
+
+
 
     @When("user enters username {string} , password {string} and login")
     public void user_enters_username_password_and_login(String username, String password) {
@@ -35,11 +47,10 @@ public class WebTableLoginStepDef {
     }
     @When("user click login button")
     public void user_click_login_button() {
-
+        webTableLoginPage.loginButton.click();
     }
     @Then("user should see url contains orders")
     public void user_should_see_url_contains_orders() {
-        webTableLoginPage.loginButton.click();
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("orders"));
     }
 
