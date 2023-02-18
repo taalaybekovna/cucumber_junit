@@ -4,6 +4,7 @@ import com.cydeo.pages.AllOrdersPage;
 import com.cydeo.pages.BasePage;
 import com.cydeo.pages.WebTableLoginPage;
 import com.cydeo.pages.WebTableOrderPage;
+import com.cydeo.utilities.BrowserUtilities;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -74,12 +75,14 @@ public class WebTableOrderStepDef {
     public void user_selects_credit_card_type(String cardType) {
         List<WebElement> cardTypes = webTableOrderPage.creditCardType;
 
-        for (WebElement each : cardTypes) {
-            if (each.getAttribute("value").equals(cardType));
-            each.click();
+        BrowserUtilities.clickRadioButton(cardTypes, cardType);
 
-
-        }
+//        for (WebElement each : cardTypes) {
+//            if (each.getAttribute("value").equals(cardType));
+//            each.click();
+//
+//
+//        }
 
 
     }
